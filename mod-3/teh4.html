@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adding HTML with createElement() and appendChild()</title>
+</head>
+<body>
+    <div id="target"></div>
+
+    <script>
+        var students = [
+            { id: "2345768", name: "John" },
+            { id: "2134657", name: "Paul" },
+            { id: "5423679", name: "Jones" }
+        ];
+
+        var targetElement = document.getElementById("target");
+
+        var select = document.createElement("select");
+
+        for (var i = 0; i < students.length; i++) {
+            var option = document.createElement("option");
+            option.value = students[i].id;
+            option.textContent = students[i].name;
+            select.appendChild(option);
+        }
+
+        targetElement.appendChild(select);
+    </script>
+</body>
+</html>

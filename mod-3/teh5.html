@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating Articles from Data</title>
+    <style>
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <section id="articleSection"></section>
+
+    <script>
+        var picArray = [
+            {
+                title: "First Article",
+                image: "https://via.placeholder.com/300",
+                mediumImage: "https://via.placeholder.com/300",
+                caption: "Caption for the first article",
+                description: "Description for the first article"
+            },
+            {
+                title: "Second Article",
+                image: "https://via.placeholder.com/300",
+                mediumImage: "https://via.placeholder.com/300",
+                caption: "Caption for the second article",
+                description: "Description for the second article"
+            },
+            {
+                title: "Third Article",
+                image: "https://via.placeholder.com/300",
+                mediumImage: "https://via.placeholder.com/300",
+                caption: "Caption for the third article",
+                description: "Description for the third article"
+            }
+        ];
+
+        var section = document.getElementById("articleSection");
+
+        picArray.forEach(function(data) {
+            var article = document.createElement("article");
+            article.classList.add("card");
+
+            var heading = document.createElement("h2");
+            heading.textContent = data.title;
+
+            var figure = document.createElement("figure");
+
+            var image = document.createElement("img");
+            image.src = data.mediumImage;
+            image.alt = data.title;
+
+            var figcaption = document.createElement("figcaption");
+            figcaption.textContent = data.caption;
+
+            var paragraph = document.createElement("p");
+            paragraph.textContent = data.description;
+
+            figure.appendChild(image);
+            figure.appendChild(figcaption);
+            article.appendChild(heading);
+            article.appendChild(figure);
+            article.appendChild(paragraph);
+
+            section.appendChild(article);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Series Search</title>
+    <style>
+        article {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>TV Series Search</h1>
+
+    <form id="searchForm">
+        <label for="query">Enter TV Series Name:</label>
+        <input id="query" name="q" type="text" required>
+        <input type="submit" value="Search">
+    </form>
+
+    <div id="results"></div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            const query = document.getElementById("query").value;
+
+            fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById("results").innerHTML = '';
+
+                    data.forEach(tvShow => {
+                        const article = document.createElement("article");
+
+                        const name = document.createElement("h2");
+                        name.textContent = tvShow.show.name;
+                        article.appendChild(name);
+
+                        const url = document.createElement("a");
+                        url.textContent = "Link to details";
+                        url.href = tvShow.show.url;
+                        url.target = "_blank";
+                        article.appendChild(url);
+
+                        const img = document.createElement("img");
+                        img.src = tvShow.show.image?.medium || 'https://via.placeholder.com/300'; // Fallback image if image is not available
+                        img.alt = tvShow.show.name;
+                        article.appendChild(img);
+
+                        const summary = document.createElement("div");
+                        summary.innerHTML = tvShow.show.summary;
+                        article.appendChild(summary);
+
+                        document.getElementById("results").appendChild(article);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+        }
+
+        document.getElementById("searchForm").addEventListener("submit", handleSubmit);
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participant List</title>
+</head>
+<body>
+    <script>
+        // Prompting the user for the number of participants
+        var numOfParticipants = parseInt(prompt("Enter the number of participants:"));
+
+        // Creating an array to store participant names
+        var participants = [];
+
+        // Prompting the user for participant names and storing them in the array
+        for (var i = 0; i < numOfParticipants; i++) {
+            var name = prompt("Enter the name of participant " + (i + 1) + ":");
+            participants.push(name);
+        }
+
+        // Sorting the participant names alphabetically
+        participants.sort();
+
+        // Creating an ordered list element
+        var ol = document.createElement("ol");
+
+        // Adding each participant name as a list item to the ordered list
+        participants.forEach(function(name) {
+            var li = document.createElement("li");
+            li.textContent = name;
+            ol.appendChild(li);
+        });
+
+        // Adding the ordered list to the HTML body
+        document.body.appendChild(ol);
+    </script>
+</body>
+</html>

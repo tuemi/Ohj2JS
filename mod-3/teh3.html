@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adding HTML with innerHTML</title>
+</head>
+<body>
+    <div id="target"></div>
+
+    <script>
+        var names = ['John', 'Paul', 'Jones'];
+
+        var targetElement = document.getElementById("target");
+
+        var htmlContent = '<ul>';
+        for (var i = 0; i < names.length; i++) {
+            htmlContent += '<li>' + names[i] + '</li>';
+        }
+        htmlContent += '</ul>';
+
+        targetElement.innerHTML = htmlContent;
+    </script>
+</body>
+</html>
